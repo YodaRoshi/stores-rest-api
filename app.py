@@ -1,4 +1,4 @@
-from flask import Flask # request is for accessing data sent by requests
+from flask import Flask, render_template # request is for accessing data sent by requests
 from flask_restful import Api
 from flask_jwt import JWT
 
@@ -39,7 +39,9 @@ def create_table():
 jwt = JWT(app, authenticate, identity)
 # this create a new endpoint /auth
 # recieve the user info and send it to the authentiate function
-
+@app.route('/') # http://127.0.0.1:5000
+def home():
+    return render_template('index.html')
 # Endpoints
 api.add_resource(UserRegister, '/register')
 api.add_resource(Item, '/item/<string:name>')
@@ -48,6 +50,6 @@ api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     app.run(port=5000, debug=True)
     #port 5000 is default thus redundant
