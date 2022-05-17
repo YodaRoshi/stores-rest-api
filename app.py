@@ -48,6 +48,6 @@ api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     app.run(port=5000, debug=True)
     #port 5000 is default thus redundant
