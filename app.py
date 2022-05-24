@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template # request is for accessing data sent by requests
 from flask_restful import Api
 from flask_jwt import JWT
@@ -10,9 +12,9 @@ from security import authenticate, identity # imported from security.py
 from db import db
 
 app = Flask(__name__)
-# this tells SQLAlchemy database is gonna live at the root folder of the project
-# this can be mySQL or any other databases
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# this tells SQLAlchemy database is gonna live at the root folder of the project this can be mySQL or any other databases
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # in order to know when an object had changed but not been saved in the database
