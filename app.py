@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import Flask, render_template # request is for accessing data sent by requests
 from flask_restful import Api
@@ -14,9 +15,11 @@ from db import db
 app = Flask(__name__)
 # this tells SQLAlchemy database is gonna live at the root folder of the project this can be mySQL or any other databases
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-DATABASE_URL = 'postgresql://pqoikqytwqtpxg:103b0938d6adf8aa0d63a9ceb33770778aadd4b7f932435f7ada88700e4232e3@ec2-3-231-82-226.compute-1.amazonaws.com:5432/d9h19umuit3t1e'
+url = os.environ.get("DATABASE_URL")
+if url.startswith("postgres://"):
+    url = url.replace("postgres://","postgresql://", 1)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('url', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # in order to know when an object had changed but not been saved in the database
