@@ -14,7 +14,7 @@ from db import db
 app = Flask(__name__)
 # this tells SQLAlchemy database is gonna live at the root folder of the project this can be mySQL or any other databases
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://pqoikqytwqtpxg:103b0938d6adf8aa0d63a9ceb33770778aadd4b7f932435f7ada88700e4232e3@ec2-3-231-82-226.compute-1.amazonaws.com:5432/d9h19umuit3t1e'
+DATABASE_URL = 'postgresql://pqoikqytwqtpxg:103b0938d6adf8aa0d63a9ceb33770778aadd4b7f932435f7ada88700e4232e3@ec2-3-231-82-226.compute-1.amazonaws.com:5432/d9h19umuit3t1e'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
